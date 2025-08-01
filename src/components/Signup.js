@@ -20,6 +20,8 @@ const Signup = () => {
         full_name: values.fullName 
       });
       
+      console.log('Sending request to:', `${apiUrl}/users/register`);
+      
       const response = await fetch(`${apiUrl}/users/register`, {
         method: 'POST',
         headers: {
@@ -32,6 +34,8 @@ const Signup = () => {
           password: values.password
         })
       });
+      
+      console.log('Response received:', response.status, response.statusText);
 
       if (response.ok) {
         await response.json(); // Remove unused data variable
