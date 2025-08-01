@@ -22,30 +22,31 @@ const Signup = () => {
       
       console.log('Sending request to:', `${apiUrl}/users/register`);
       
-      const response = await fetch(`${apiUrl}/users/register`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          username: values.username,
-          email: values.email,
-          full_name: values.fullName,
-          password: values.password
-        })
-      });
-      
-      console.log('Response received:', response.status, response.statusText);
+      try {
+        const response = await fetch(`${apiUrl}/users/register`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            username: values.username,
+            email: values.email,
+            full_name: values.fullName,
+            password: values.password
+          })
+        });
+        
+        console.log('Response received:', response.status, response.statusText);
 
-      if (response.ok) {
-        await response.json(); // Remove unused data variable
-        message.success('Registration successful! Please login.');
-        navigate('/login');
-      } else {
-        const errorData = await response.json();
-        message.error(errorData.error || 'Registration failed');
-      }
-    } catch (error) {
+        if (response.ok) {
+          await response.json(); // Remove unused data variable
+          message.success('Registration successful! Please login.');
+          navigate('/login');
+        } else {
+          const errorData = await response.json();
+          message.error(errorData.error || 'Registration failed');
+        }
+      } catch (error) {
       console.error('Registration error:', error);
       message.error('Network error. Please try again.');
     } finally {
