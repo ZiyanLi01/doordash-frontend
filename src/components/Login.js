@@ -11,7 +11,9 @@ const Login = () => {
   const onFinish = async (values) => {
     setLoading(true);
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL || 'http://localhost:8080'}/users/login`, {
+      const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:8080';
+      console.log('Login API URL:', apiUrl);
+      const response = await fetch(`${apiUrl}/users/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
