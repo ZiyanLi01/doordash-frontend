@@ -11,7 +11,7 @@ const Signup = () => {
   const onFinish = async (values) => {
     setLoading(true);
     try {
-      const response = await fetch('/api/users/register', {
+      const response = await fetch('/users/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -19,13 +19,13 @@ const Signup = () => {
         body: JSON.stringify({
           username: values.username,
           email: values.email,
-          fullName: values.fullName,
+          full_name: values.fullName,
           password: values.password
         })
       });
 
       if (response.ok) {
-        const data = await response.json();
+        await response.json(); // Remove unused data variable
         message.success('Registration successful! Please login.');
         navigate('/login');
       } else {

@@ -25,7 +25,7 @@ const MainApp = () => {
   // Fetch restaurants from backend
   const fetchRestaurants = async () => {
     try {
-      const response = await fetch('/api/restaurants');
+      const response = await fetch('/restaurants?t=' + Date.now());
       if (response.ok) {
         const data = await response.json();
         setRestaurants(data);
@@ -44,7 +44,7 @@ const MainApp = () => {
   const fetchMenuItems = async (restaurantId) => {
     setMenuLoading(true);
     try {
-      const response = await fetch(`/api/menu-items/restaurant/${restaurantId}`);
+      const response = await fetch(`/menu-items?restaurant_id=${restaurantId}&t=${Date.now()}`);
       if (response.ok) {
         const data = await response.json();
         setSelectedRestaurantMenu(data);
@@ -179,7 +179,7 @@ const MainApp = () => {
             
             <div className="restaurant-header">
               <Image
-                src={selectedRestaurant.imageUrl}
+                src={selectedRestaurant.image_url}
                 alt={selectedRestaurant.name}
                 className="restaurant-image"
               />
@@ -201,7 +201,7 @@ const MainApp = () => {
                       cover={
                         <Image
                           alt={item.name}
-                          src={item.imageUrl}
+                          src={item.image_url}
                           className="menu-item-image"
                         />
                       }
