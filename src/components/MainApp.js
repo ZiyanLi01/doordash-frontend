@@ -25,7 +25,7 @@ const MainApp = () => {
   // Fetch restaurants from backend
   const fetchRestaurants = async () => {
     try {
-      const response = await fetch('/restaurants?t=' + Date.now());
+      const response = await fetch(`${process.env.REACT_APP_API_URL || 'http://localhost:8080'}/restaurants?t=` + Date.now());
       if (response.ok) {
         const data = await response.json();
         setRestaurants(data);
@@ -44,7 +44,7 @@ const MainApp = () => {
   const fetchMenuItems = async (restaurantId) => {
     setMenuLoading(true);
     try {
-      const response = await fetch(`/menu-items?restaurant_id=${restaurantId}&t=${Date.now()}`);
+      const response = await fetch(`${process.env.REACT_APP_API_URL || 'http://localhost:8080'}/menu-items?restaurant_id=${restaurantId}&t=${Date.now()}`);
       if (response.ok) {
         const data = await response.json();
         setSelectedRestaurantMenu(data);

@@ -11,7 +11,7 @@ const Signup = () => {
   const onFinish = async (values) => {
     setLoading(true);
     try {
-      const response = await fetch('/users/register', {
+      const response = await fetch(`${process.env.REACT_APP_API_URL || 'http://localhost:8080'}/users/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
